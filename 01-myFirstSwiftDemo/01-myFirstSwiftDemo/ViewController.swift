@@ -16,6 +16,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        /*
+            这里主要测试了  使用swift 中  各种手势的使用方法 和 按钮的创建和使用
+         */
+        
         let view1 = UIView(frame: CGRect(x: 0, y: 20, width: 100, height: 100))
         view1.backgroundColor = UIColor.red
         self.view.addSubview(view1)
