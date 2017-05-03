@@ -26,6 +26,7 @@ class NoteView: UIView {
     @IBOutlet weak var textField: UITextField!
     @IBAction func didClickSubmit(_ sender: Any) {
         
+        
         guard (self.textField.text != nil) else {
             return
         }
@@ -61,3 +62,12 @@ class NoteView: UIView {
     }
     
 }
+
+extension Int {
+    
+    func dictAtInt() -> Int {
+        return 10
+    }
+    
+}
+
