@@ -60,6 +60,13 @@ class ViewController: UIViewController {
             }
         }
         
+        class SomeClassSubClass : SomeClass{
+            
+           override class var overridedComputedP : Int {
+                return 31
+            }
+        }
+        
         
         // 使用
         print(SomeStruct.p)

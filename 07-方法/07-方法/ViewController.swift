@@ -27,7 +27,9 @@ class ViewController: UIViewController {
         
 //        testMutating()
         
-        testMutatingSelf()
+//        testMutatingSelf()
+        
+        ClassMethodTestSubClass.classMethodTypeTwo()
     }
     func testClassMethod() {
         

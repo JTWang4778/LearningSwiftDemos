@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB0960E81ED2CE4F001BD507 /* ClassMethodTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0960E71ED2CE4F001BD507 /* ClassMethodTest.swift */; };
+		BB3BE8BC1ED2CFAB008647F0 /* ClassMethodTestSubClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3BE8BB1ED2CFAB008647F0 /* ClassMethodTestSubClass.swift */; };
+		BB3BE8BE1ED2D310008647F0 /* ClassMethodTestSubSubClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3BE8BD1ED2D310008647F0 /* ClassMethodTestSubSubClass.swift */; };
 		BB5A4C371EB2DB6500645194 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A4C361EB2DB6500645194 /* AppDelegate.swift */; };
 		BB5A4C391EB2DB6500645194 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A4C381EB2DB6500645194 /* ViewController.swift */; };
 		BB5A4C3C1EB2DB6500645194 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB5A4C3A1EB2DB6500645194 /* Main.storyboard */; };
@@ -15,6 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BB0960E71ED2CE4F001BD507 /* ClassMethodTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassMethodTest.swift; sourceTree = "<group>"; };
+		BB3BE8BB1ED2CFAB008647F0 /* ClassMethodTestSubClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassMethodTestSubClass.swift; sourceTree = "<group>"; };
+		BB3BE8BD1ED2D310008647F0 /* ClassMethodTestSubSubClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassMethodTestSubSubClass.swift; sourceTree = "<group>"; };
 		BB5A4C331EB2DB6500645194 /* 07-方法.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "07-方法.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB5A4C361EB2DB6500645194 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BB5A4C381EB2DB6500645194 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +66,9 @@
 				BB5A4C3D1EB2DB6500645194 /* Assets.xcassets */,
 				BB5A4C3F1EB2DB6500645194 /* LaunchScreen.storyboard */,
 				BB5A4C421EB2DB6500645194 /* Info.plist */,
+				BB0960E71ED2CE4F001BD507 /* ClassMethodTest.swift */,
+				BB3BE8BB1ED2CFAB008647F0 /* ClassMethodTestSubClass.swift */,
+				BB3BE8BD1ED2D310008647F0 /* ClassMethodTestSubSubClass.swift */,
 			);
 			path = "07-方法";
 			sourceTree = "<group>";
@@ -136,8 +145,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB3BE8BE1ED2D310008647F0 /* ClassMethodTestSubSubClass.swift in Sources */,
+				BB0960E81ED2CE4F001BD507 /* ClassMethodTest.swift in Sources */,
 				BB5A4C391EB2DB6500645194 /* ViewController.swift in Sources */,
 				BB5A4C371EB2DB6500645194 /* AppDelegate.swift in Sources */,
+				BB3BE8BC1ED2CFAB008647F0 /* ClassMethodTestSubClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +313,7 @@
 				BB5A4C471EB2DB6500645194 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
