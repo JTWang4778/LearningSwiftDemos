@@ -12,20 +12,7 @@ class ViewController: UIViewController {
     
     let reuseIdentifier = "ChannelCell"
     
-    var dataArr : [[ChannelModel]] {
-        
-        var asdf = [[ChannelModel]]()
-        for i in 0..<3 {
-            var arr = [ChannelModel]()
-            for j in 0..<10 {
-                
-                let model = ChannelModel.init(section: i, row: j)
-                arr.append(model)
-            }
-            asdf.append(arr)
-        }
-        return asdf
-    }
+    var dataArr : [[ChannelModel]]!
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -34,6 +21,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.loadData()
         self.collectionView.bounces = false
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
@@ -52,6 +40,20 @@ class ViewController: UIViewController {
         self.flowLayout.headerReferenceSize = CGSize(width: 0, height: 20)
         self.flowLayout.footerReferenceSize = CGSize(width: 0, height: 20)
         self.flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+    }
+    
+    func loadData() {
+        var asdf = [[ChannelModel]]()
+        for i in 0..<3 {
+            var arr = [ChannelModel]()
+            for j in 0..<10 {
+                
+                let model = ChannelModel.init(section: i, row: j)
+                arr.append(model)
+            }
+            asdf.append(arr)
+        }
+        self.dataArr = asdf
     }
 
     override func didReceiveMemoryWarning() {
@@ -108,44 +110,18 @@ extension ViewController : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         
-//        var arr = [1,3,5,7,9]
-//        var arr2 = [2,4,6,8,10]
-//        var bigArr = [arr,arr2]
+        let model = self.dataArr[sourceIndexPath.section].remove(at: sourceIndexPath.row)
+//        var dataArrayCopy = Array(self.dataArr)
+//        let subArr = self.dataArr[sourceIndexPath.section]
+//        dataArrayCopy[sourceIndexPath.section] = Array(subArr)
 //        
+//        var subArrDes = self.dataArr[destinationIndexPath.section]
+//        subArrDes.insert(model, at: destinationIndexPath.row)
+//        dataArrayCopy[destinationIndexPath.section] = Array(subArrDes)
 //        
-//        // 下标返回的是新的对象 所以
-//        var subArr1 = bigArr[0]
-//        let ele = subArr1.remove(at: 0)
-//        print(subArr1)
-//        print(bigArr)
+//        self.dataArr = dataArrayCopy
         
-        
-        
-        var subArr = self.dataArr[sourceIndexPath.section]
-        let model = subArr.remove(at: sourceIndexPath.row)
-        var desSubArr : [ChannelModel]
-        
-        
-        var bigArr = [[ChannelModel]]()
-        for i in 0..<self.dataArr.count {
-            
-            if sourceIndexPath.section == i {
-                if sourceIndexPath.section == destinationIndexPath.section {
-                    subArr.insert(model, at: destinationIndexPath.row)
-                    desSubArr = subArr
-                }else{
-                    desSubArr = self.dataArr[destinationIndexPath.section]
-                    desSubArr.insert(model, at: destinationIndexPath.row)
-                }
-                bigArr.insert(desSubArr, at: i)
-            }else{
-                
-            }
-            
-        }
-        
-       
-        
+        self.dataArr[destinationIndexPath.section].insert(model, at: destinationIndexPath.row)
     }
     
 }
