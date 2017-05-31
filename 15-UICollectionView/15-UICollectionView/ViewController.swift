@@ -12,6 +12,8 @@ class ViewController: UIViewController {
     
     let reuseIdentifier = "ChannelCell"
     
+    let headerReuseIdentifier = "headerReuseIdentifier"
+    
     var dataArr : [[ChannelModel]]!
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -27,6 +29,8 @@ class ViewController: UIViewController {
         self.collectionView.delegate = self
         self.collectionView.register(UINib.init(nibName: "ChannelCell", bundle: Bundle.main), forCellWithReuseIdentifier: reuseIdentifier)
         
+        self.collectionView.register(UINib.init(nibName: "CollectionHeaderView", bundle: Bundle.main), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
+        
         self.collectionView.isUserInteractionEnabled = true
         let long = UILongPressGestureRecognizer.init(target: self, action: #selector(longPress(recognizer:)))
         self.collectionView.addGestureRecognizer(long)
@@ -37,8 +41,8 @@ class ViewController: UIViewController {
 //        self.flowLayout.itemSize = CGSize.init(width: 40, height: 40)
 //        self.flowLayout.minimumInteritemSpacing = 6
 //        self.flowLayout.minimumLineSpacing = 6
-        self.flowLayout.headerReferenceSize = CGSize(width: 0, height: 20)
-        self.flowLayout.footerReferenceSize = CGSize(width: 0, height: 20)
+        self.flowLayout.headerReferenceSize = CGSize(width: 0, height: 200)
+        self.flowLayout.footerReferenceSize = CGSize(width: 0, height: 200)
         self.flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
     }
     
@@ -70,16 +74,32 @@ class ViewController: UIViewController {
             if indexPath == nil {
                 return
             }
-            print(self.collectionView.beginInteractiveMovementForItem(at: indexPath!))
+            if #available(iOS 9.0, *) {
+                print(self.collectionView.beginInteractiveMovementForItem(at: indexPath!))
+            } else {
+                // Fallback on earlier versions
+            }
             
             
         }else if recognizer.state == .changed {
-            self.collectionView.updateInteractiveMovementTargetPosition(recognizer.location(in: self.collectionView))
+            if #available(iOS 9.0, *) {
+                self.collectionView.updateInteractiveMovementTargetPosition(recognizer.location(in: self.collectionView))
+            } else {
+                // Fallback on earlier versions
+            }
         }else if recognizer.state == .ended {
             
-            self.collectionView.endInteractiveMovement()
+            if #available(iOS 9.0, *) {
+                self.collectionView.endInteractiveMovement()
+            } else {
+                // Fallback on earlier versions
+            }
         }else{
-            self.collectionView.endInteractiveMovement()
+            if #available(iOS 9.0, *) {
+                self.collectionView.endInteractiveMovement()
+            } else {
+                // Fallback on earlier versions
+            }
         }
     }
 }
@@ -100,6 +120,12 @@ extension ViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ChannelCell
         cell.model = self.dataArr[indexPath.section][indexPath.row]
+        cell.closure = {
+            // 移动cell到第三组 第一个
+            let model = self.dataArr[indexPath.section].remove(at: indexPath.row)
+            self.dataArr[2].insert(model, at: 0)
+            self.collectionView.moveItem(at: indexPath, to: IndexPath(row: 0, section: 2))
+        }
         return cell
     }
     
@@ -124,6 +150,23 @@ extension ViewController : UICollectionViewDataSource {
         self.dataArr[destinationIndexPath.section].insert(model, at: destinationIndexPath.row)
     }
     
+    
+    
+    // header  footer 数据源 
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        
+        if kind == UICollectionElementKindSectionHeader {
+            
+           let reuseView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier, for: indexPath) as! CollectionHeaderView
+            reuseView.delegate = self
+            return reuseView
+        }else{
+//            reuseView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: headerReuseIdentifier, for: indexPath)
+        }
+        return UICollectionReusableView()
+        
+    }
 }
 
 
@@ -137,6 +180,13 @@ extension ViewController : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         
         print("\(indexPath.section)-\(indexPath.row)")
+        
+    }
+}
+extension ViewController : CollectionHeaderViewDelegate {
+    
+    func didClickMore() {
+        print("诶呀妈呀   你点我了")
     }
 }
 
@@ -170,13 +220,13 @@ extension ViewController : UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: 80, height: 10)
+        return CGSize(width: 80, height: 60)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize{
         
         if section == 2 {
-            return CGSize(width: 0, height: 30)
+            return CGSize(width: 0, height: 0)
         }
         return CGSize(width: 0, height: 0)
     }
