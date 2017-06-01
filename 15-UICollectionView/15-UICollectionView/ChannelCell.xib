@@ -37,7 +37,7 @@
                     </button>
                 </subviews>
             </view>
-            <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.96862745289999996" green="0.78039217000000005" blue="0.34509804840000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Cmx-xt-3gG" secondAttribute="trailing" constant="6" id="BXo-NB-4Sm"/>
                 <constraint firstItem="Cmx-xt-3gG" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="6" id="CxL-kB-Pxo"/>

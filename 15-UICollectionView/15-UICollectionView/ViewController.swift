@@ -10,6 +10,11 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    var cell : UICollectionViewCell?
+    var fackCell : UIView?
+    var beginPoint : CGPoint?
+    var beginIndexpath : IndexPath?
+    
     let reuseIdentifier = "ChannelCell"
     
     let headerReuseIdentifier = "headerReuseIdentifier"
@@ -68,16 +73,24 @@ class ViewController: UIViewController {
     func longPress(recognizer: UILongPressGestureRecognizer) {
         
         if recognizer.state == .began {
-            print(NSStringFromCGPoint(recognizer.location(in: self.collectionView)))
 
             let indexPath = self.collectionView.indexPathForItem(at: recognizer.location(in: self.collectionView))
             if indexPath == nil {
                 return
             }
             if #available(iOS 9.0, *) {
-                print(self.collectionView.beginInteractiveMovementForItem(at: indexPath!))
+                self.collectionView.beginInteractiveMovementForItem(at: indexPath!)
             } else {
-                // Fallback on earlier versions
+                beginPoint = recognizer.location(in: self.collectionView)
+                beginIndexpath = indexPath
+                cell = self.collectionView.cellForItem(at: indexPath!)
+                if cell == nil {
+                    return
+                }
+                fackCell = copyView(from: cell!)
+                cell!.isHidden = true
+                fackCell!.frame = cell!.frame
+                self.collectionView.addSubview(fackCell!)
             }
             
             
@@ -85,7 +98,29 @@ class ViewController: UIViewController {
             if #available(iOS 9.0, *) {
                 self.collectionView.updateInteractiveMovementTargetPosition(recognizer.location(in: self.collectionView))
             } else {
-                // Fallback on earlier versions
+                
+                let location = recognizer.location(in: self.collectionView)
+                let moveX = location.x - beginPoint!.x
+                let moveY = location.y - beginPoint!.y
+                fackCell!.center = CGPoint.init(x: fackCell!.center.x + moveX, y: fackCell!.center.y + moveY)
+                beginPoint = location
+                var nowIndexPath = self.collectionView.indexPathForItem(at: recognizer.location(in: self.collectionView))
+                if nowIndexPath == nil {
+                    return
+                }
+                let nowView = self.collectionView.cellForItem(at: nowIndexPath!)
+                if nowView == nil {
+                    return
+                }
+                if nowIndexPath!.section == 0 && nowIndexPath!.row == 0 &&  nowView == nil{
+                    nowIndexPath = IndexPath.init(row: self.collectionView.numberOfItems(inSection: beginIndexpath!.section) - 1, section: beginIndexpath!.section)
+                }
+                
+                
+                moveModelFrom(sourceIndexPath: beginIndexpath!, to: nowIndexPath!)
+                self.collectionView.moveItem(at: beginIndexpath!, to: nowIndexPath!)
+                beginIndexpath = nowIndexPath
+                
             }
         }else if recognizer.state == .ended {
             
@@ -93,14 +128,35 @@ class ViewController: UIViewController {
                 self.collectionView.endInteractiveMovement()
             } else {
                 // Fallback on earlier versions
+                fackCell?.removeFromSuperview()
+                fackCell = nil
+                cell?.isHidden = false
             }
         }else{
             if #available(iOS 9.0, *) {
                 self.collectionView.endInteractiveMovement()
             } else {
                 // Fallback on earlier versions
+                fackCell?.removeFromSuperview()
+                fackCell = nil
+                cell?.isHidden = false
             }
         }
+    }
+    
+    // MARK: 复制view的方法
+    func copyView(from: UIView) -> UIView {
+        
+        UIGraphicsBeginImageContext(from.bounds.size)
+        from.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return UIImageView.init(image: image)
+    }
+    // MARK: 操作数据源方法
+    func moveModelFrom(sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath){
+        let model = self.dataArr[sourceIndexPath.section].remove(at: sourceIndexPath.row)
+        self.dataArr[destinationIndexPath.section].insert(model, at: destinationIndexPath.row)
     }
 }
 
@@ -136,7 +192,7 @@ extension ViewController : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         
-        let model = self.dataArr[sourceIndexPath.section].remove(at: sourceIndexPath.row)
+//        let model = self.dataArr[sourceIndexPath.section].remove(at: sourceIndexPath.row)
 //        var dataArrayCopy = Array(self.dataArr)
 //        let subArr = self.dataArr[sourceIndexPath.section]
 //        dataArrayCopy[sourceIndexPath.section] = Array(subArr)
@@ -144,10 +200,13 @@ extension ViewController : UICollectionViewDataSource {
 //        var subArrDes = self.dataArr[destinationIndexPath.section]
 //        subArrDes.insert(model, at: destinationIndexPath.row)
 //        dataArrayCopy[destinationIndexPath.section] = Array(subArrDes)
-//        
+        
 //        self.dataArr = dataArrayCopy
         
-        self.dataArr[destinationIndexPath.section].insert(model, at: destinationIndexPath.row)
+//        let model = self.dataArr[sourceIndexPath.section].remove(at: sourceIndexPath.row)
+//        self.dataArr[destinationIndexPath.section].insert(model, at: destinationIndexPath.row)
+        
+        moveModelFrom(sourceIndexPath: sourceIndexPath, to: destinationIndexPath)
     }
     
     
