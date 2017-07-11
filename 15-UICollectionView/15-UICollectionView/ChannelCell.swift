@@ -12,6 +12,9 @@ class ChannelCell: UICollectionViewCell {
 
     @IBOutlet weak var label: UILabel!
     
+    @IBOutlet weak var closeButton: UIButton!
+    
+    var closure : (() -> ())?
 
     
     var model : ChannelModel! {
@@ -20,6 +23,10 @@ class ChannelCell: UICollectionViewCell {
         }
     }
     
+    @IBAction func didClickCloseButton(_ sender: Any) {
+        
+        self.closure!()
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

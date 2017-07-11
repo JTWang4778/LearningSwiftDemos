@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,25 +19,42 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cmx-xt-3gG">
-                        <rect key="frame" x="0.0" y="0.0" width="269" height="74"/>
+                        <rect key="frame" x="6" y="6" width="257" height="62"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hcZ-sz-dmQ">
+                        <rect key="frame" x="237" y="2" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="fKd-Hu-svX"/>
+                            <constraint firstAttribute="width" constant="30" id="gVP-EV-fA9"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="plll_close"/>
+                        <connections>
+                            <action selector="didClickCloseButton:" destination="gTV-IL-0wX" eventType="touchUpInside" id="wcc-Pr-52h"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
-            <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.96862745289999996" green="0.78039217000000005" blue="0.34509804840000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="Cmx-xt-3gG" secondAttribute="bottom" id="TbK-YJ-dM6"/>
-                <constraint firstItem="Cmx-xt-3gG" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Yol-xx-OT5"/>
-                <constraint firstItem="Cmx-xt-3gG" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="ZO9-cF-gl1"/>
-                <constraint firstAttribute="trailing" secondItem="Cmx-xt-3gG" secondAttribute="trailing" id="oBe-Mh-wm2"/>
+                <constraint firstAttribute="trailing" secondItem="Cmx-xt-3gG" secondAttribute="trailing" constant="6" id="BXo-NB-4Sm"/>
+                <constraint firstItem="Cmx-xt-3gG" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="6" id="CxL-kB-Pxo"/>
+                <constraint firstAttribute="bottom" secondItem="Cmx-xt-3gG" secondAttribute="bottom" constant="6" id="b2e-4u-dVK"/>
+                <constraint firstItem="hcZ-sz-dmQ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="2" id="ghr-ea-94B"/>
+                <constraint firstItem="Cmx-xt-3gG" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="6" id="vfK-lb-TXf"/>
+                <constraint firstAttribute="trailing" secondItem="hcZ-sz-dmQ" secondAttribute="trailing" constant="2" id="wQs-lu-Re2"/>
             </constraints>
             <size key="customSize" width="269" height="74"/>
             <connections>
+                <outlet property="closeButton" destination="hcZ-sz-dmQ" id="w4f-kc-t4A"/>
                 <outlet property="label" destination="Cmx-xt-3gG" id="0ab-eO-oo8"/>
             </connections>
-            <point key="canvasLocation" x="-7" y="40"/>
+            <point key="canvasLocation" x="-7.5" y="40"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="plll_close" width="32" height="32"/>
+    </resources>
 </document>
