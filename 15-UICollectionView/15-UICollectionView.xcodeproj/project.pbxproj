@@ -129,6 +129,7 @@
 				TargetAttributes = {
 					BB4FCE521ED6B201004FA58F = {
 						CreatedOnToolsVersion = 8.3;
+						DevelopmentTeam = KG5ZNG86KM;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -298,7 +299,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = KG5ZNG86KM;
 				INFOPLIST_FILE = "15-UICollectionView/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "JT.com.-5-UICollectionView";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -310,7 +313,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = KG5ZNG86KM;
 				INFOPLIST_FILE = "15-UICollectionView/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "JT.com.-5-UICollectionView";
 				PRODUCT_NAME = "$(TARGET_NAME)";

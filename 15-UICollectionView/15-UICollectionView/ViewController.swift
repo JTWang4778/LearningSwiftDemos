@@ -70,16 +70,32 @@ class ViewController: UIViewController {
             if indexPath == nil {
                 return
             }
-            print(self.collectionView.beginInteractiveMovementForItem(at: indexPath!))
+            if #available(iOS 9.0, *) {
+                print(self.collectionView.beginInteractiveMovementForItem(at: indexPath!))
+            } else {
+                // Fallback on earlier versions
+            }
             
             
         }else if recognizer.state == .changed {
-            self.collectionView.updateInteractiveMovementTargetPosition(recognizer.location(in: self.collectionView))
+            if #available(iOS 9.0, *) {
+                self.collectionView.updateInteractiveMovementTargetPosition(recognizer.location(in: self.collectionView))
+            } else {
+                // Fallback on earlier versions
+            }
         }else if recognizer.state == .ended {
             
-            self.collectionView.endInteractiveMovement()
+            if #available(iOS 9.0, *) {
+                self.collectionView.endInteractiveMovement()
+            } else {
+                // Fallback on earlier versions
+            }
         }else{
-            self.collectionView.endInteractiveMovement()
+            if #available(iOS 9.0, *) {
+                self.collectionView.endInteractiveMovement()
+            } else {
+                // Fallback on earlier versions
+            }
         }
     }
 }
