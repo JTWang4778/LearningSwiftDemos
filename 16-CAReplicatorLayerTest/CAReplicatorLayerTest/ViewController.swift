@@ -37,21 +37,27 @@ class ViewController: UIViewController {
         circleLayer.masksToBounds = true
         animationView.layer.addSublayer(circleLayer)
         
+        let keyFrameAnimation = CAKeyframeAnimation()
+        let rect = CGRect(x: (kWidth - 200) * 0.5, y: 0, width: 200, height: 200)
+        let path = UIBezierPath(roundedRect: rect, cornerRadius: 100)
+        keyFrameAnimation.calculationMode = "paced"
+        keyFrameAnimation.keyPath = "position"
+        keyFrameAnimation.path = path.cgPath
+        keyFrameAnimation.duration = 2.0
+        keyFrameAnimation.repeatCount = MAXFLOAT
+        circleLayer.add(keyFrameAnimation, forKey: "keyANima")
+        
+        
+//        self.view.addSubview(animationView)
         
         let replicate = CAReplicatorLayer.init()
         replicate.frame = animationView.bounds
         replicate.instanceCount = 12
-        replicate.instanceTransform = CATransform3DMakeRotation(CGFloat(Double.pi / 6.0), 0, 0, 1)
+//        replicate.instanceTransform = CATransform3DMakeRotation(CGFloat(-Double.pi / 6.0), 0, 0, 1)
         replicate.instanceAlphaOffset = -(1 / 12.0)
         replicate.addSublayer(circleLayer)
+        replicate.instanceDelay = (1.0 / 6.0)
         animationView.layer.addSublayer(replicate)
-        
-        
-        let roteAnimation = CABasicAnimation.init(keyPath: "transform")
-        roteAnimation.toValue = CATransform3DMakeRotation(CGFloat(-Double.pi * 2), 0, 0, 1)
-        roteAnimation.duration = 2.0
-        roteAnimation.repeatCount = MAXFLOAT
-        circleLayer.add(roteAnimation, forKey: "transformKey")
         
     }
     func typeOne()
