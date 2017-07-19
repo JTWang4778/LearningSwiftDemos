@@ -51,6 +51,23 @@ class ViewController: UIViewController {
         label.frame = gradientLayer.bounds // 这一步很重要要  要重新设置frame
         
         
+        // 利用CAShapeLayer  绘制指定圆角矩形
+        
+        shapeLayer.lineWidth = 3
+        shapeLayer.strokeColor = UIColor.red.cgColor
+        shapeLayer.fillColor = UIColor.white.cgColor
+        
+        let rect = CGRect(x: 20, y: 64, width: 100, height: 100)
+        let radii = CGSize(width: 20, height: 20)
+        let corners = UIRectCorner.init(rawValue: UIRectCorner.bottomLeft.rawValue + UIRectCorner.topRight.rawValue)
+        let path = UIBezierPath.init(roundedRect: rect, byRoundingCorners: corners, cornerRadii: radii)
+        
+        shapeLayer.frame = rect
+        self.view.layer.addSublayer(shapeLayer)
+        shapeLayer.path = path.cgPath
+        
+        
+        
         
         
         
