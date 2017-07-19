@@ -18,9 +18,40 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 //        setupUI()
         
-        typeOne()
+//        typeOne()
+        typeTwo()
         
         
+    }
+    func typeTwo() // 加载提示
+    {
+        let animationView = UIView.init(frame: CGRect(x: 0, y: 300, width: kWidth, height: 200))
+        animationView.backgroundColor = UIColor.lightGray
+        self.view.addSubview(animationView)
+        
+        let circleLayer = CALayer()
+        circleLayer.frame = CGRect(x: (kWidth - 20) * 0.5, y:0 , width: 20, height: 20)
+            // CGRect(x: (kWidth - 20) * 0.5, y: (200 - 20) * 0.5, width: 20, height: 20)
+        circleLayer.backgroundColor = UIColor.red.cgColor
+        circleLayer.cornerRadius = 10
+        circleLayer.masksToBounds = true
+        animationView.layer.addSublayer(circleLayer)
+        
+        
+        let replicate = CAReplicatorLayer.init()
+        replicate.frame = animationView.bounds
+        replicate.instanceCount = 12
+        replicate.instanceTransform = CATransform3DMakeRotation(CGFloat(Double.pi / 6.0), 0, 0, 1)
+        replicate.instanceAlphaOffset = -(1 / 12.0)
+        replicate.addSublayer(circleLayer)
+        animationView.layer.addSublayer(replicate)
+        
+        
+        let roteAnimation = CABasicAnimation.init(keyPath: "transform")
+        roteAnimation.toValue = CATransform3DMakeRotation(CGFloat(-Double.pi * 2), 0, 0, 1)
+        roteAnimation.duration = 2.0
+        roteAnimation.repeatCount = MAXFLOAT
+        circleLayer.add(roteAnimation, forKey: "transformKey")
         
     }
     func typeOne()
