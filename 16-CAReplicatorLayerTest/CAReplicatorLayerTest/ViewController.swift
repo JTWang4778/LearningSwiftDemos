@@ -19,7 +19,11 @@ class ViewController: UIViewController {
 //        setupUI()
         
 //        typeOne()
-        typeTwo()
+//        typeTwo()
+        
+        let animationView = LoadingAnimationView.init(frame: CGRect(x: 0, y: 300, width: 200, height: 200), smallWidth: 20, backgroundColo: UIColor.gray, smallColor: UIColor.orange)
+        animationView.backgroundColor = UIColor.gray
+        self.view.addSubview(animationView)
         
         
     }
@@ -40,23 +44,21 @@ class ViewController: UIViewController {
         let keyFrameAnimation = CAKeyframeAnimation()
         let rect = CGRect(x: (kWidth - 200) * 0.5, y: 0, width: 200, height: 200)
         let path = UIBezierPath(roundedRect: rect, cornerRadius: 100)
-        keyFrameAnimation.calculationMode = "paced"
+        keyFrameAnimation.calculationMode = "paced" // discrete paced cubic cubicPaced
         keyFrameAnimation.keyPath = "position"
         keyFrameAnimation.path = path.cgPath
+        keyFrameAnimation.timingFunction = CAMediaTimingFunction.init(name: kCAMediaTimingFunctionEaseInEaseOut)
         keyFrameAnimation.duration = 2.0
         keyFrameAnimation.repeatCount = MAXFLOAT
-        circleLayer.add(keyFrameAnimation, forKey: "keyANima")
-        
-        
-//        self.view.addSubview(animationView)
-        
+        circleLayer.add(keyFrameAnimation, forKey: "keyFrameAnimation")
+
         let replicate = CAReplicatorLayer.init()
-        replicate.frame = animationView.bounds
-        replicate.instanceCount = 12
-//        replicate.instanceTransform = CATransform3DMakeRotation(CGFloat(-Double.pi / 6.0), 0, 0, 1)
-        replicate.instanceAlphaOffset = -(1 / 12.0)
+//        replicate.frame = animationView.bounds
+        replicate.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        replicate.instanceCount = 6
+        replicate.instanceAlphaOffset = -(1 / 6.0) //  
         replicate.addSublayer(circleLayer)
-        replicate.instanceDelay = (1.0 / 6.0)
+        replicate.instanceDelay = (1.0 / 12.0)
         animationView.layer.addSublayer(replicate)
         
     }
