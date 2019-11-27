@@ -36,7 +36,7 @@ class ItemsView: UIScrollView {
     }
     
     
-    func didClickImage(tap: UIGestureRecognizer) {
+    @objc func didClickImage(tap: UIGestureRecognizer) {
         let imageView = tap.view as! UIImageView
         self.selectItem?(imageView.tag - 100)
     }

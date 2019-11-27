@@ -70,7 +70,7 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func longPress(recognizer: UILongPressGestureRecognizer) {
+    @objc func longPress(recognizer: UILongPressGestureRecognizer) {
         
         if recognizer.state == .began {
 
